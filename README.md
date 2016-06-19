@@ -1,13 +1,25 @@
 # WeatherForecast
 
 ###代码片段
-    //选中那一行
-     - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-       //获取模型对象
-       XPCityGroup *cityGroup = self.cityGroupArray[indexPath.section];
-        //发送通知，包含参数(选择的城市名字)
-       [[NSNotificationCenter defaultCenter] postNotificationName:@"DidCityChange" object:self userInfo:@{@"CityName":cityGroup.cities[indexPath.row]}];
-        //收回控制器
-       [self dismissViewControllerAnimated:YES completion:nil];
-    }
-  
+        - (void)listenChangeCity:(NSNotification *)notification {
+            //获取传过来的参数
+            NSString *cityName = notification.userInfo[@"CityName"];
+          //汉字：上海->shanghai
+          //笔记中的方式二
+            NSLog(@"城市名字:%@",cityName);
+    
+           //地理编码获取城市拼音
+          [self.geocoder geocodeAddressString:cityName completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+             CLPlacemark *placemark = [placemarks lastObject];
+             //将服务器返回地标中location值赋值self.userLocation(!!!!!)
+            self.userLocation = placemark.location;
+           NSString *cityStr = placemark.addressDictionary[@"City"];
+         //更新城市label
+          self.headerView.cityLabel.text = cityStr;
+        
+          NSLog(@"城市拼音:%@;000--%f", cityStr, self.userLocation.coordinate.latitude);
+          }];
+    
+             //发送请求
+            [self sendRequestToServer];
+        }
