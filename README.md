@@ -1,2 +1,5 @@
 # WeatherForecast
-这是一个关于天气的练手项目，非常适合新手学习。
+##项目截图
+![](https://github.com/xprocwin7/WeatherForecast/raw/master/1.png) 
+![](https://github.com/xprocwin7/WeatherForecast/raw/master/2.png) 
+![](https://github.com/xprocwin7/WeatherForecast/raw/master/3.png) 
