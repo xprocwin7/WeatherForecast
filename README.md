@@ -1,6 +1,6 @@
-# WeatherForecast
+## WeatherForecast
 
-##提示：如果报错，修改下pch的文件路径即可。
+###温馨提示：如果报错，修改下pch的文件路径即可。
 
 ###代码片段
         - (void)listenChangeCity:(NSNotification *)notification {
